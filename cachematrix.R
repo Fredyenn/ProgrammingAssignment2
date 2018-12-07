@@ -2,7 +2,7 @@
 ## functions do
 
 ## Write a short comment describing this function
-
+##This function saves matrix and its inverse cache
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         set <- function(y) {
@@ -10,7 +10,7 @@ makeCacheMatrix <- function(x = matrix()) {
                 m <<- NULL
         }
         get <- function() x
-        setinv <- function(inver) m <<- inver
+        setinv <- function(solve) m <<- solve
         getinv <- function() m
         list(set = set, get = get,
              setinv = setinv,
@@ -20,7 +20,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Write a short comment describing this function
-
+##This function finds the inverse matrix of input matrix if there is no cache, 
+##Otherwise, it retrives from cache.
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         m <- x$getinv()
@@ -29,7 +30,7 @@ cacheSolve <- function(x, ...) {
                 return(m)
         }
         data <- x$get()
-        m <- solve(data, ...)
+        m <- solve(data, ...) ## calculate inverse matrix
         x$setinv(m)
         m
 }
